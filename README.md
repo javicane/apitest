@@ -1,6 +1,6 @@
-#Postgresql REST Api 
+# Postgresql REST Api 
 
-###Pre-requisites
+### Pre-requisites
 
 1- install following packages:
 ```
@@ -12,7 +12,7 @@ dnf install libpq-devel  #to avoid psycopg python module error at install
 pip3 install flask flask_sqlalchemy flask-migrate psycopg2 
 ```
 
-###Test
+### Test
  
 1- clone this repository
 
@@ -38,7 +38,7 @@ curl --request GET --header "Content-Type: application/json" http://localhost:12
 curl --request PUT --header "Content-Type: application/json" --data '{ "dateOfBirth": "2021-12-03" }' http://localhost:1234/hello/John
 ```
 
-###Architecture Diagram
+### Architecture Diagram
 
 The api & database run in an ec2 instance with a RAID 1 configuration for redundancy. Route 53 for DNS resolution. 
 Database & WAL backups are written to local disk and periodically copied to DR ec2 instance in different region. This DR instance is a replica from primary site instance: same users, packages, directories structure, etc.
@@ -50,7 +50,7 @@ In case of primary database outage:
 3- Ansible scripts will do the database restore from local files, api files restore from github and Route 53 dns update pointing to the DR site.
 
 
-###No-Downtime Production Deployment
+### No-Downtime Production Deployment
 
 1- run ansible playbook against the DR instance to restore database & api (to keep it simple, this was tested using root user. A better option would be a user with sudo privileges):
 ```
