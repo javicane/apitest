@@ -64,7 +64,7 @@ ansible-playbook -i </path/to/prod_inventory> main_restore.yml
 ```
 
 - Ansible Directory Layout
-
+```
 ansible
 ├── ansible.cfg
 ├── main_backup.yml
@@ -86,3 +86,4 @@ ansible
         │   └── main.yml
         └── tasks
             └── main.yml
+```
