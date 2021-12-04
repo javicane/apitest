@@ -1,0 +1,37 @@
+  - name: install postgres (just in case) 
+    dnf: "name={{ item }} state=present"
+    with_items:
+      - postgresql
+      - postgresql-server
+
+  - name: get last backup file name
+    become: yes
+    become_user: postgres
+    shell: ls -lrt "{{ bk_dir }}" | grep "tar.gz" | tail -1 | awk '{print $9}'
+    register: list_bk_out 
+
+
+  - name: extract tar.gz backup 
+    become: yes
+    become_user: postgres
+    unarchive: 
+      src: "{{ bk_dir }}/{{ list_bk_out.stdout }}" 
+      dest: "{{ data_dir }}"
+      remote_src: true
+  
+  - name: create recovery.conf file
+    become: yes
+    become_user: postgres
+    file: 
+      path: "{{ data_dir }}/recovery.conf"
+      state: touch
+
+  - name: recovery.conf settings
+    become: yes
+    become_user: postgres
+    shell: echo "restore_command = 'cp /var/lib/pgsql/backups/archives/%f %p'" > /var/lib/pgsql/data/recovery.conf
+
+  - name: start database
+    become: yes
+    become_user: postgres
+    shell: pg_ctl start -D "{{ data_dir }}"

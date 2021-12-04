@@ -1,0 +1,22 @@
+  - name: delete target dir
+    file:
+      path: "{{ remote_dir }}"
+      state: absent
+
+  - name: create target dir
+    file:
+      path: "{{ remote_dir }}"
+      state: directory
+
+  - name: clone repository
+    shell: git clone -b master "{{ github_repo }}" "{{ remote_dir }}" 
+
+  - name: change directory owner
+    file:
+      path: "{{ remote_dir }}"
+      state: directory
+      recurse: yes
+      owner: "{{ api_owner }}"
+      group: "{{ api_group }}"
+
+      

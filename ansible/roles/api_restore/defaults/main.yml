@@ -1,0 +1,4 @@
+github_repo: git@github.com:javicane/apibackup.git 
+remote_dir: /home/apitest/api
+api_owner: apitest
+api_group: apitest

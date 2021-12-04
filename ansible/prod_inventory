@@ -1,0 +1,2 @@
+[prod]
+remotehost ansible_connection=local

@@ -1,0 +1,19 @@
+  - name: run database backup
+    become: yes
+    become_user: postgres
+    shell: pg_basebackup -D "{{ bk_dir }}/{{ bk_time }}" -Xs
+
+  - name: compress backup directory - I had to use shell since archive was not compressing empty folders
+    become: yes
+    become_user: postgres
+    shell: 
+      tar cvzf "{{ bk_dir }}/{{ bk_time }}.tar.gz" -C "{{ bk_dir }}/{{ bk_time }}" .
+    args:
+      warn: false
+
+  - name: remove backup directory
+    become: yes
+    become_user: postgres
+    file: 
+      path: "{{ bk_dir }}/{{ bk_time }}"
+      state: absent 

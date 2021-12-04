@@ -1,0 +1,5 @@
+- name: run script in remote host
+  hosts: remotehost 
+  gather_facts: no
+  roles:
+    - db_backup
