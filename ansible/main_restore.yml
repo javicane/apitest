@@ -2,4 +2,5 @@
   hosts: remotehost 
   gather_facts: no
   roles:
+    - db_restore
     - api_restore

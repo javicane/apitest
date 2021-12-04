@@ -50,7 +50,7 @@ def handle_name(name_id):
         delta1 = datetime(curr_time.year, var_date.month, var_date.day)
         delta2 = datetime(curr_time.year+1, var_date.month, var_date.day)
         days2bd = ((delta1 if delta1 > curr_time else delta2) - curr_time).days + 1
-        if days2bd > 0:
+        if days2bd != 365:
             return {"message": f"Hello, {name_id.name}! Your birthday is in {days2bd} day(s)."}
         else: 
             return {"message": f"Hello, {name_id.name}! Happy birthday!"}
