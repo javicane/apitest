@@ -62,3 +62,27 @@ In case of primary database outage:
 cd ansible
 ansible-playbook -i </path/to/prod_inventory> main_restore.yml
 ```
+
+- Ansible Directory Layout
+
+ansible
+├── ansible.cfg
+├── main_backup.yml
+├── main_restore.yml
+├── prod_inventory
+└── roles
+    ├── api_restore
+    │   ├── defaults
+    │   │   └── main.yml
+    │   └── tasks
+    │       └── main.yml
+    ├── db_backup
+    │   ├── defaults
+    │   │   └── main.yml
+    │   └── tasks
+    │       └── main.yml
+    └── db_restore
+        ├── defaults
+        │   └── main.yml
+        └── tasks
+            └── main.yml
