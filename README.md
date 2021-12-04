@@ -12,6 +12,7 @@ dnf install libpq-devel  #to avoid psycopg python module error at install
 pip3 install flask flask_sqlalchemy flask-migrate psycopg2 
 ```
 
+
 ### Test
  
 1- clone this repository
@@ -38,7 +39,9 @@ curl --request GET --header "Content-Type: application/json" http://localhost:12
 curl --request PUT --header "Content-Type: application/json" --data '{ "dateOfBirth": "2021-12-03" }' http://localhost:1234/hello/John
 ```
 
+
 ### Architecture Diagram
+
 
 ![Architecture Diagram](restapi_postgresql.png)
 
