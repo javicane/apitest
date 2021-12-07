@@ -56,7 +56,7 @@ In case of primary database outage:
 
 1. the monitoring tool will invoke a lambda function with an sns notification.
 2. the lambda function will run remotely Ansible scripts from another ec2 instance pointing to EC2 in AZ B
-3. in case AZ B is done, the lambda function will run remotely Ansible scripts pointing to EC2 in Region B
+3. in case AZ B is down too, the lambda function will run remotely Ansible scripts pointing to EC2 in Region B
 4. Ansible scripts will do the database restore using the backup & wal's in EFS fs, api files restore from github and Route 53 dns update pointing to the DR site.
 
 
