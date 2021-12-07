@@ -42,6 +42,7 @@ curl --request PUT --header "Content-Type: application/json" --data '{ "dateOfBi
 
 ### Architecture Diagram
 
+![Architecture Diagram](restapi_postgresql.png)
 
 The api & database run in an ec2 instance with a RAID 1 configuration for redundancy. Route 53 for DNS resolution. 
 Database & WAL backups are written to local disk and periodically copied to DR ec2 instance in different region. This DR instance is a replica from primary site instance: same users, packages, directories structure, etc.
