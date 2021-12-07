@@ -1,5 +1,9 @@
 # Postgresql REST Api 
 
+Multi-Region REST API example.
+The api and the database are EC2 installed (non-aws rds, non-aws api gateway). It's a simple python flask api pointing a local postgresql database. It will switchover to a different region in case of an outage. 
+The idea behind this architecture is to show the switch to a different region (this could have been multi-az api also but this option would have been more simpler since most of the AWS services support multi-AZ option -load balancers, api gateway, route 53, etc.-). 
+
 ### Pre-requisites
 
 1. install following packages:
@@ -44,14 +48,14 @@ curl --request PUT --header "Content-Type: application/json" --data '{ "dateOfBi
 
 ![Architecture Diagram](restapi_postgresql_1.png)
 
-The api & database run in an ec2 instance with a RAID 1 configuration for redundancy. Route 53 for DNS resolution. 
-Database & WAL backups are written to local disk and periodically copied to DR ec2 instance in different region. This DR instance is a replica from primary site instance: same users, packages, directories structure, etc.
+The api & database run in an ec2 instance with a multi-region EFS for store the backups & wal's. Route 53 for DNS resolution. 
+The DR instance is a replica from primary site instance: same users, packages, directories structure, etc.
 
 In case of primary database outage:
 
 1. the monitoring tool will invoke a lambda function with an sns notification.
 2. the lambda function will run remotely Ansible scripts from another ec2 instance pointing to DR instance
-3. Ansible scripts will do the database restore from local files, api files restore from github and Route 53 dns update pointing to the DR site.
+3. Ansible scripts will do the database restore using the backup & wal's in EFS fs, api files restore from github and Route 53 dns update pointing to the DR site.
 
 
 ### No-Downtime Production Deployment
