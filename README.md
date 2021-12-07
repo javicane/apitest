@@ -1,6 +1,7 @@
 # Postgresql REST Api 
 
-Multi-Region REST API example.
+1. Multi-Region REST API example.
+
 The api and the database are EC2 installed (non-aws rds, non-aws api gateway). It's a simple python flask api pointing a local postgresql database. It will switchover to a different region in case of an outage. 
 The idea behind this architecture is to show the switch to a different region (this could have been multi-az api also but this option would have been more simpler since most of the AWS services support multi-AZ option -load balancers, api gateway, route 53, etc.-). 
 
