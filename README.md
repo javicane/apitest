@@ -49,7 +49,7 @@ curl --request PUT --header "Content-Type: application/json" --data '{ "dateOfBi
 
 ![Architecture Diagram](restapi_architecture.png)
 
-The api & database run in an ec2 instance with a multi-region EFS for store the backups & wal's. Route 53 for DNS resolution. 
+The api & database run in an ec2 instance with a multi-az & multi-region EFS for store the backups & wal's. Route 53 for DNS resolution. 
 The AZ B & DR instances are a replica from primary site instance: same users, packages, directories structure, etc.
 
 In case of primary database outage:
